@@ -1,5 +1,7 @@
 package kr.imcf.mybatis.account;
 
+import kr.imcf.mybatis.config.LogExclusion;
+import kr.imcf.mybatis.config.LogInclusion;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,8 +18,16 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @GetMapping("/account")
-    public AccountResponse getAccountAll(){
+    @LogInclusion
+    @GetMapping("/account1")
+    public AccountResponse getAccountAll1(){
+        logger.trace("요청이 들어왔습니다");
+        return accountService.getAccountAll();
+    }
+
+    @LogExclusion
+    @GetMapping("/account2")
+    public AccountResponse getAccountAll2(){
         logger.trace("요청이 들어왔습니다");
         return accountService.getAccountAll();
     }
